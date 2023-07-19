@@ -169,6 +169,7 @@ class TelpoThermalPrinter(activity: TelpoFlutterSdkPlugin) {
             super.run()
             try {
                 mUsbThermalPrinter?.reset()
+                mUsbThermalPrinter?.setMonoSpace(true);
                 mUsbThermalPrinter?.setAlgin(UsbThermalPrinter.ALGIN_LEFT)
                 mUsbThermalPrinter?.setLeftIndent(0)
                 mUsbThermalPrinter?.setLineSpace(0)
