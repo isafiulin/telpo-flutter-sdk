@@ -177,7 +177,7 @@ class TelpoThermalPrinter(activity: TelpoFlutterSdkPlugin) {
 
                 mUsbThermalPrinter?.setTextSize(24)
                 mUsbThermalPrinter?.setAlgin(UsbThermalPrinter.ALGIN_MIDDLE)
-                mUsbThermalPrinter?.addString("101")
+                mUsbThermalPrinter?.addString("v1.1")
                 mUsbThermalPrinter?.printString()
 
 
