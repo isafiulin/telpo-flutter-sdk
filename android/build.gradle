@@ -45,9 +45,9 @@ android {
         minSdkVersion 19
     }
 
-    configurations {
-        all*.exclude group: 'com.google.zxing'
-    }
+//    configurations {
+//        all*.exclude group: 'com.google.zxing'
+//    }
 }
 
 dependencies {
