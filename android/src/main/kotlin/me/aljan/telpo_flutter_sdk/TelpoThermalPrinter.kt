@@ -172,7 +172,7 @@ class TelpoThermalPrinter(activity: TelpoFlutterSdkPlugin) {
                 mUsbThermalPrinter?.setAlgin(UsbThermalPrinter.ALGIN_LEFT)
                 mUsbThermalPrinter?.setLeftIndent(0)
                 mUsbThermalPrinter?.setLineSpace(0)
-                mUsbThermalPrinter?.setGray(5)
+                mUsbThermalPrinter?.setGray(12)
 
                 for (data in printDataArray) {
                     val type = utils.getPrintType(data["type"].toString())
