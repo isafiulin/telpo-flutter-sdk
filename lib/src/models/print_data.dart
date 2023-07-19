@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:telpo_flutter_sdk/telpo_flutter_sdk.dart';
 
 /// [Enum] representing printable element type.
-enum _PrintDataType { byte, text, space }
+enum _PrintDataType { byte, text, space, escpos }
 
 /// Plain Old Dart Object representing printing data.
 ///
@@ -63,6 +63,23 @@ class PrintData {
   }) {
     return PrintData._(
       _PrintDataType.byte,
+      bytesList,
+      width,
+      height,
+      alignment,
+      fontSize,
+    );
+  }
+
+  factory PrintData.escpos({
+    required List<Uint8List?> bytesList,
+    double? width,
+    double? height,
+    PrintAlignment? alignment,
+    PrintedFontSize? fontSize,
+  }) {
+    return PrintData._(
+      _PrintDataType.escpos,
       bytesList,
       width,
       height,

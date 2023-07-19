@@ -170,15 +170,18 @@ class TelpoThermalPrinter(activity: TelpoFlutterSdkPlugin) {
             try {
                 mUsbThermalPrinter?.reset()
                 mUsbThermalPrinter?.setMonoSpace(true);
+                mUsbThermalPrinter?.setGray(7);
                 mUsbThermalPrinter?.setAlgin(UsbThermalPrinter.ALGIN_MIDDLE)
 //                mUsbThermalPrinter?.setLeftIndent(0)
 //                mUsbThermalPrinter?.setLineSpace(0)
-                mUsbThermalPrinter?.setGray(7);
 
-                mUsbThermalPrinter?.setTextSize(24)
-                mUsbThermalPrinter?.setAlgin(UsbThermalPrinter.ALGIN_MIDDLE)
-                mUsbThermalPrinter?.addString("v1.1")
-                mUsbThermalPrinter?.printString()
+//                mUsbThermalPrinter?.setTextSize(24)
+//                mUsbThermalPrinter?.setAlgin(UsbThermalPrinter.ALGIN_MIDDLE)
+//                mUsbThermalPrinter?.addString("v1.2")
+//                mUsbThermalPrinter?.addString("MERCHANT NAME:             Telpo");
+//                mUsbThermalPrinter?.addString("ИНН:              11111111111112");
+//                mUsbThermalPrinter?.addString("INN:              11111111111112");
+//                mUsbThermalPrinter?.printString()
 
 
                 for (data in printDataArray) {
@@ -187,6 +190,9 @@ class TelpoThermalPrinter(activity: TelpoFlutterSdkPlugin) {
                     when (type) {
                         PrintType.Text -> {
                             printText(data)
+                        }
+                        PrintType.EscPos -> {
+                            printEscPos(data)
                         }
                         PrintType.Byte -> {
                             printByte(data)
@@ -262,6 +268,22 @@ class TelpoThermalPrinter(activity: TelpoFlutterSdkPlugin) {
             val bmp = utils.createByteImage(bitmap as ByteArray)
 
             mUsbThermalPrinter?.printLogo(bmp, false)
+        }
+
+        mUsbThermalPrinter?.printString()
+        result?.success(true)
+        return
+    }
+
+    private fun printEscPos(data: Map<String, Any>) {
+        val value = data["data"] as ArrayList<*>;
+
+        for (item in value) {
+//            val bmp = utils.createByteImage(bitmap as ByteArray)
+
+//            mUsbThermalPrinter?.printLogo(bmp, false)
+
+            mUsbThermalPrinter?.EscPosCommandExe(item as ByteArray)
         }
 
         mUsbThermalPrinter?.printString()

@@ -5,7 +5,7 @@ import android.graphics.BitmapFactory
 import com.telpo.tps550.api.printer.UsbThermalPrinter
 
 enum class PrintType {
-    Byte, Text, QR, PDF, WalkPaper,
+    Byte, Text, QR, PDF, WalkPaper, EscPos
 }
 
 class Utils {
@@ -52,6 +52,9 @@ class Utils {
             }
             "qr" -> {
                 PrintType.QR
+            }
+            "escpos" -> {
+                PrintType.EscPos
             }
             "pdf" -> {
                 PrintType.PDF

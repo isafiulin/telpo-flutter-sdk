@@ -41,6 +41,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> _connect() async {
     // Platform calls are catched on plugin-side. No need to use try-catch here,
     // as connect() method returns non-nullable boolean.
+    final isConnected = await _telpoFlutterChannel.isConnected();
+
+    if (isConnected == true) {
+      _telpoFlutterChannel.disconnect();
+    }
 
     final bool connected = await _telpoFlutterChannel.connect();
 
@@ -73,12 +78,19 @@ class _HomeScreenState extends State<HomeScreen> {
       fontSize: PrintedFontSize.size34,
     );
 
+    final textData2 = PrintData.text(
+      'ИНН               11111111111112',
+      alignment: PrintAlignment.left,
+      fontSize: PrintedFontSize.size24,
+    );
+
     // Creating 8-line empty space element.
     final spacing = PrintData.space(line: 8);
 
     // Inserting previously created text element to the sheet.
     sheet.addElement(textData);
 
+    sheet.addElement(textData2);
     // Inserting previously created spacing element to the sheet.
     sheet.addElement(spacing);
 
@@ -150,7 +162,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   'Check status',
                 ),
               ),
-              if ([PrintResult.success.name, TelpoStatus.ok.name].contains(_telpoStatus)) ...[
+              if ([PrintResult.success.name, TelpoStatus.ok.name]
+                  .contains(_telpoStatus)) ...[
                 const SizedBox(height: 24.0),
                 CupertinoButton(
                   color: telpoColor,
