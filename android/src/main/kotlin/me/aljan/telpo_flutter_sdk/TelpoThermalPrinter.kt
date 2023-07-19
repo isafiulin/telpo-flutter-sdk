@@ -286,7 +286,7 @@ class TelpoThermalPrinter(activity: TelpoFlutterSdkPlugin) {
             mUsbThermalPrinter?.EscPosCommandExe(item as ByteArray)
         }
 
-        mUsbThermalPrinter?.printString()
+//        mUsbThermalPrinter?.printString()
         result?.success(true)
         return
     }
