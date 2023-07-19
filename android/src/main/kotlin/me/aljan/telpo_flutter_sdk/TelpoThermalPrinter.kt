@@ -121,7 +121,7 @@ class TelpoThermalPrinter(activity: TelpoFlutterSdkPlugin) {
 
     fun connect(): Boolean {
         return try {
-            mUsbThermalPrinter?.start(0)
+            mUsbThermalPrinter?.start(1)
             mUsbThermalPrinter?.reset()
             true
         } catch (e: Exception) {
@@ -170,10 +170,16 @@ class TelpoThermalPrinter(activity: TelpoFlutterSdkPlugin) {
             try {
                 mUsbThermalPrinter?.reset()
                 mUsbThermalPrinter?.setMonoSpace(true);
-                mUsbThermalPrinter?.setAlgin(UsbThermalPrinter.ALGIN_LEFT)
+                mUsbThermalPrinter?.setAlgin(UsbThermalPrinter.ALGIN_MIDDLE)
 //                mUsbThermalPrinter?.setLeftIndent(0)
 //                mUsbThermalPrinter?.setLineSpace(0)
                 mUsbThermalPrinter?.setGray(7);
+
+                mUsbThermalPrinter?.setTextSize(24)
+                mUsbThermalPrinter?.setAlgin(UsbThermalPrinter.ALGIN_MIDDLE)
+                mUsbThermalPrinter?.addString("101")
+                mUsbThermalPrinter?.printString()
+
 
                 for (data in printDataArray) {
                     val type = utils.getPrintType(data["type"].toString())
