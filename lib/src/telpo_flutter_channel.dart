@@ -4,13 +4,15 @@ import 'package:flutter/services.dart';
 import 'package:telpo_flutter_sdk/telpo_flutter_sdk.dart';
 
 class TelpoFlutterChannel {
+  TelpoFlutterChannel._() {
+    _platform = MethodChannel(_channelName);
+  }
+
+  static TelpoFlutterChannel get instance => TelpoFlutterChannel._();
+
   late MethodChannel _platform;
 
   final String _channelName = 'me.aljan.telpo_flutter_sdk/telpo';
-
-  TelpoFlutterChannel() {
-    _platform = MethodChannel(_channelName);
-  }
 
   /// Returns an [Enum] of type [TelpoStatus] indicating current status of
   /// underlying Telpo Device.

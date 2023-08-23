@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
   String _telpoStatus = 'Not initialized';
   bool _isLoading = false;
 
-  final _telpoFlutterChannel = TelpoFlutterChannel();
+  final _telpoFlutterChannel = TelpoFlutterChannel.instance;
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> _connect() async {
