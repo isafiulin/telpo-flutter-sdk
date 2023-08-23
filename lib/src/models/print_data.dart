@@ -14,6 +14,7 @@ class PrintData {
   final double? _height;
   final PrintAlignment? _alignment;
   final PrintedFontSize? _fontSize;
+  final bool? _isBold;
 
   final _PrintDataType _type;
 
@@ -25,6 +26,7 @@ class PrintData {
     this._height,
     this._alignment,
     this._fontSize,
+    this._isBold,
   ]);
 
   /// PrintData from text. Optional alignment (PrintAlignment) and fontSize
@@ -33,6 +35,7 @@ class PrintData {
     String text, {
     PrintAlignment? alignment,
     PrintedFontSize? fontSize,
+    bool isBold = false,
   }) {
     return PrintData._(
       _PrintDataType.text,
@@ -41,6 +44,7 @@ class PrintData {
       null,
       alignment,
       fontSize,
+      isBold,
     );
   }
 
@@ -68,23 +72,21 @@ class PrintData {
       height,
       alignment,
       fontSize,
+      null,
     );
   }
 
   factory PrintData.escpos({
     required List<Uint8List?> bytesList,
-    double? width,
-    double? height,
-    PrintAlignment? alignment,
-    PrintedFontSize? fontSize,
   }) {
     return PrintData._(
       _PrintDataType.escpos,
       bytesList,
-      width,
-      height,
-      alignment,
-      fontSize,
+      null,
+      null,
+      null,
+      null,
+      null,
     );
   }
 
@@ -97,6 +99,7 @@ class PrintData {
       "alignment": _alignment?.name,
       "type": _type.name,
       "fontSize": _fontSize?.name,
+      "isBold": _isBold,
     };
   }
 
@@ -107,8 +110,10 @@ class PrintData {
       data: $_data,
       width: $_width,
       height: $_height,
-      alignment: $_alignment
+      alignment: $_alignment,
       type: $_type,
-      fontSize: $_fontSize)''';
+      fontSize: $_fontSize,
+      isBold: $_isBold,
+      )''';
   }
 }

@@ -57,8 +57,13 @@ android {
         release {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
+//            minifyEnabled false
             signingConfig signingConfigs.debug
         }
+    }
+
+    configurations {
+        all*.exclude group: 'com.google.zxing'
     }
 }
 
@@ -68,4 +73,5 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+//    implementation 'com.github.DantSu:ESCPOS-ThermalPrinter-Android:3.3.0'
 }

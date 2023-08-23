@@ -1,7 +1,9 @@
 package me.aljan.telpo_flutter_sdk
 
 import android.annotation.SuppressLint
+import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Intent
 import android.os.Handler
 import android.os.Looper
 import android.os.Message
@@ -164,25 +166,25 @@ class TelpoThermalPrinter(activity: TelpoFlutterSdkPlugin) {
         }
     }
 
+    private fun setMonoSpace() {
+        val path = "/Internal storage/roboto.ttf"
+        val intent = Intent("android.intent.action.set.printer.mode")
+        intent.putExtra("printer_monoFont_path", path) //monospace font
+        context.sendBroadcast(intent)
+    }
+
     private inner class Print : Thread() {
         override fun run() {
             super.run()
             try {
+                setMonoSpace()
                 mUsbThermalPrinter?.reset()
                 mUsbThermalPrinter?.setMonoSpace(true);
                 mUsbThermalPrinter?.setGray(7);
-                mUsbThermalPrinter?.setAlgin(UsbThermalPrinter.ALGIN_MIDDLE)
-//                mUsbThermalPrinter?.setLeftIndent(0)
-//                mUsbThermalPrinter?.setLineSpace(0)
+                mUsbThermalPrinter?.setAlgin(UsbThermalPrinter.ALGIN_LEFT)
+//                mUsbThermalPrinter?.setTextSize(16)
 
-//                mUsbThermalPrinter?.setTextSize(24)
-//                mUsbThermalPrinter?.setAlgin(UsbThermalPrinter.ALGIN_MIDDLE)
-//                mUsbThermalPrinter?.addString("v1.2")
-//                mUsbThermalPrinter?.addString("MERCHANT NAME:             Telpo");
-//                mUsbThermalPrinter?.addString("ИНН:              11111111111112");
-//                mUsbThermalPrinter?.addString("INN:              11111111111112");
-//                mUsbThermalPrinter?.printString()
-
+                println("ERMEK printed 7")
 
                 for (data in printDataArray) {
                     val type = utils.getPrintType(data["type"].toString())
@@ -192,6 +194,9 @@ class TelpoThermalPrinter(activity: TelpoFlutterSdkPlugin) {
                             printText(data)
                         }
                         PrintType.EscPos -> {
+                            println("ERMEK printed ESC POS")
+//                            mUsbThermalPrinter?.reset()
+//                            mUsbThermalPrinter?.setMonoSpace(true)
                             printEscPos(data)
                         }
                         PrintType.Byte -> {
@@ -251,9 +256,11 @@ class TelpoThermalPrinter(activity: TelpoFlutterSdkPlugin) {
         val text = data["data"].toString()
         val alignment = utils.getAlignment(data["alignment"].toString())
         val fontSize = utils.getFontSize(data["fontSize"].toString())
+        val isBold = utils.getIsBold(data["isBold"].toString())
 
         mUsbThermalPrinter?.setTextSize(fontSize)
         mUsbThermalPrinter?.setAlgin(alignment)
+        mUsbThermalPrinter?.setBold(isBold)
         mUsbThermalPrinter?.addString(text)
         mUsbThermalPrinter?.printString()
 
@@ -279,14 +286,9 @@ class TelpoThermalPrinter(activity: TelpoFlutterSdkPlugin) {
         val value = data["data"] as ArrayList<*>;
 
         for (item in value) {
-//            val bmp = utils.createByteImage(bitmap as ByteArray)
-
-//            mUsbThermalPrinter?.printLogo(bmp, false)
-
             mUsbThermalPrinter?.EscPosCommandExe(item as ByteArray)
         }
 
-//        mUsbThermalPrinter?.printString()
         result?.success(true)
         return
     }
