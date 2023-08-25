@@ -86,21 +86,21 @@ class _HomeScreenState extends State<HomeScreen> {
     // ]);
     // log(initializePart.join(','));
 
-    sheet.addElement(
-      PrintData.escpos(
-        bytesList: [
-          Uint8List.fromList([
-            ...initialize,
-            ...cancelKanjiMode,
-            // ...selectPrintMode,
-            ...setLineSpacing,
-            ...setCharacterCodeTable,
-            // ...command,
-            // ...setFontA,
-          ])
-        ],
-      ),
-    );
+    // sheet.addElement(
+    //   PrintData.escpos(
+    //     bytesList: [
+    //       Uint8List.fromList([
+    //         ...initialize,
+    //         ...cancelKanjiMode,
+    //         // ...selectPrintMode,
+    //         ...setLineSpacing,
+    //         ...setCharacterCodeTable,
+    //         // ...command,
+    //         // ...setFontA,
+    //       ])
+    //     ],
+    //   ),
+    // );
 
     // log(Uint8List.fromList(command).join(','));
 
@@ -152,9 +152,14 @@ class _HomeScreenState extends State<HomeScreen> {
         '      ПККМ NeoFiscal 3.0.0      ',
         fontSize: PrintedFontSize.size20,
       ),
-      PrintData.escpos(bytesList: [
-        Uint8List.fromList(qrCommand),
-      ]),
+      PrintData.qr(
+        'tested by AErmek',
+        alignment: PrintAlignment.center,
+        width: 300,
+      ),
+      // PrintData.escpos(bytesList: [
+      //   Uint8List.fromList(qrCommand),
+      // ]),
       PrintData.space(line: 8),
     ]);
 

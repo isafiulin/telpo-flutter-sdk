@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:telpo_flutter_sdk/telpo_flutter_sdk.dart';
 
 /// [Enum] representing printable element type.
-enum _PrintDataType { byte, text, space, escpos }
+enum _PrintDataType { byte, text, space, escpos, qr }
 
 /// Plain Old Dart Object representing printing data.
 ///
@@ -45,6 +45,22 @@ class PrintData {
       alignment,
       fontSize,
       isBold,
+    );
+  }
+
+  factory PrintData.qr(
+    String text, {
+    PrintAlignment? alignment,
+    double? width,
+  }) {
+    return PrintData._(
+      _PrintDataType.qr,
+      text,
+      width,
+      width,
+      alignment,
+      null,
+      null,
     );
   }
 
