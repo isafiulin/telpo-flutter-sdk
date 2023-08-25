@@ -181,7 +181,7 @@ class TelpoThermalPrinter(activity: TelpoFlutterSdkPlugin) {
                 mUsbThermalPrinter?.reset()
                 mUsbThermalPrinter?.setMonoSpace(true);
                 mUsbThermalPrinter?.setGray(7);
-                mUsbThermalPrinter?.setAlgin(UsbThermalPrinter.ALGIN_LEFT)
+//                mUsbThermalPrinter?.setAlgin(UsbThermalPrinter.ALGIN_LEFT)
 //                mUsbThermalPrinter?.setTextSize(16)
 
                 println("ERMEK printed 8")
@@ -272,14 +272,15 @@ class TelpoThermalPrinter(activity: TelpoFlutterSdkPlugin) {
         val value = data["data"] as ArrayList<*>
 
         val alignment = utils.getAlignment(data["alignment"].toString())
+        val width = utils.getWidth(data["width"].toString())
 
         mUsbThermalPrinter?.setAlgin(alignment)
 
         for (bitmap in value) {
-//            val bytes = bitmap as ByteArray;
-            val bmp = utils.createByteImage(bitmap as ByteArray)
+            val bytes = bitmap as ByteArray;
+//            val bmp = utils.createByteImage(bitmap as ByteArray)
 
-            mUsbThermalPrinter?.printLogo(bmp, false)
+            mUsbThermalPrinter?.printLogoRaw(bytes,width ?: 220 , bytes.size, false)
         }
 
 //        mUsbThermalPrinter?.printString()
