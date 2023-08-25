@@ -153,7 +153,7 @@ class _HomeScreenState extends State<HomeScreen> {
         fontSize: PrintedFontSize.size20,
       ),
       PrintData.qr(
-        'tested by AErmek',
+        'Qr code example',
         alignment: PrintAlignment.center,
         width: 300,
       ),

@@ -279,7 +279,7 @@ class TelpoThermalPrinter(activity: TelpoFlutterSdkPlugin) {
         val value = data["data"] as ArrayList<*>
 
         val alignment = utils.getAlignment(data["alignment"].toString())
-        val width = utils.getWidth(data["width"].toString())
+        val width = utils.getWidth(data["width"].toString())?: 220
 
         mUsbThermalPrinter?.setAlgin(alignment)
 
@@ -287,7 +287,7 @@ class TelpoThermalPrinter(activity: TelpoFlutterSdkPlugin) {
             val bytes = bitmap as ByteArray;
 //            val bmp = utils.createByteImage(bitmap as ByteArray)
 
-            mUsbThermalPrinter?.printLogoRaw(bytes,width ?: 220 , bytes.size, false)
+            mUsbThermalPrinter?.printLogoRaw(bytes,width.toInt() , bytes.size, false)
         }
 
 //        mUsbThermalPrinter?.printString()
@@ -302,7 +302,7 @@ class TelpoThermalPrinter(activity: TelpoFlutterSdkPlugin) {
 
         mUsbThermalPrinter?.setAlgin(alignment)
 
-        val qrImage = CreateCode(text, BarcodeFormat.QR_CODE, width, width);
+        val qrImage = CreateCode(text, BarcodeFormat.QR_CODE, width.toInt(), width.toInt());
         mUsbThermalPrinter?.printLogo(qrImage, false)
 
         result?.success(true)

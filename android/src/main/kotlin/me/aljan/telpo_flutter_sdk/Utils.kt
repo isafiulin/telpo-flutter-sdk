@@ -81,9 +81,9 @@ class Utils {
         }
     }
 
-    fun getWidth(width: String?): Int? {
+    fun getWidth(width: String?): Double? {
         if(width.isNullOrEmpty()) return null
-        return width.toIntOrNull()
+        return width.toDoubleOrNull()
     }
 
 }
