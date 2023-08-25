@@ -184,7 +184,7 @@ class TelpoThermalPrinter(activity: TelpoFlutterSdkPlugin) {
                 mUsbThermalPrinter?.setAlgin(UsbThermalPrinter.ALGIN_LEFT)
 //                mUsbThermalPrinter?.setTextSize(16)
 
-                println("ERMEK printed 7")
+                println("ERMEK printed 8")
 
                 for (data in printDataArray) {
                     val type = utils.getPrintType(data["type"].toString())
@@ -200,7 +200,7 @@ class TelpoThermalPrinter(activity: TelpoFlutterSdkPlugin) {
                             printEscPos(data)
                         }
                         PrintType.Byte -> {
-                            printByte(data)
+                            printImage(data)
                         }
                         PrintType.QR -> {}
                         PrintType.PDF -> {}
@@ -268,19 +268,38 @@ class TelpoThermalPrinter(activity: TelpoFlutterSdkPlugin) {
         return
     }
 
-    private fun printByte(data: Map<String, Any>) {
+    private fun printImage(data: Map<String, Any>) {
         val value = data["data"] as ArrayList<*>
 
+        val alignment = utils.getAlignment(data["alignment"].toString())
+
+        mUsbThermalPrinter?.setAlgin(alignment)
+
         for (bitmap in value) {
+//            val bytes = bitmap as ByteArray;
             val bmp = utils.createByteImage(bitmap as ByteArray)
 
             mUsbThermalPrinter?.printLogo(bmp, false)
         }
 
-        mUsbThermalPrinter?.printString()
+//        mUsbThermalPrinter?.printString()
         result?.success(true)
         return
     }
+
+//    private fun printByte(data: Map<String, Any>) {
+//        val value = data["data"] as ArrayList<*>
+//
+//        for (bitmap in value) {
+//            val bmp = utils.createByteImage(bitmap as ByteArray)
+//
+//            mUsbThermalPrinter?.printLogo(bmp, false)
+//        }
+//
+//        mUsbThermalPrinter?.printString()
+//        result?.success(true)
+//        return
+//    }
 
     private fun printEscPos(data: Map<String, Any>) {
         val value = data["data"] as ArrayList<*>;
