@@ -189,7 +189,7 @@ class TelpoThermalPrinter(activity: TelpoFlutterSdkPlugin) {
 //                mUsbThermalPrinter?.setAlgin(UsbThermalPrinter.ALGIN_LEFT)
 //                mUsbThermalPrinter?.setTextSize(16)
 
-                println("ERMEK printed 9")
+                //println("ERMEK printed 9")
 
                 for (data in printDataArray) {
                     val type = utils.getPrintType(data["type"].toString())
@@ -199,7 +199,7 @@ class TelpoThermalPrinter(activity: TelpoFlutterSdkPlugin) {
                             printText(data)
                         }
                         PrintType.EscPos -> {
-                            println("ERMEK printed ESC POS")
+                            //println("ERMEK printed ESC POS")
 //                            mUsbThermalPrinter?.reset()
 //                            mUsbThermalPrinter?.setMonoSpace(true)
                             printEscPos(data)
