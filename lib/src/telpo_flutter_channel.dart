@@ -141,12 +141,15 @@ class TelpoFlutterChannel {
     }
   }
 
-  Future<bool> configurePrinter(TelpoPrinterConfiguration configuration) async {
+  /// [TelpoPrinterConfiguration] configuration
+  ///
+  ///
+  Future<bool> configurePrinter(Map<String, dynamic> configuration) async {
     try {
       final isSuccess = await _platform.invokeMethod(
         'configurePrinter',
         {
-          "data": configuration.toJson(),
+          "data": configuration,
         },
       );
 
