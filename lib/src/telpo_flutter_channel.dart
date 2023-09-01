@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:telpo_flutter_sdk/src/models/telpo_printer_configuration.dart';
 import 'package:telpo_flutter_sdk/telpo_flutter_sdk.dart';
 
 class TelpoFlutterChannel {
@@ -137,6 +138,23 @@ class TelpoFlutterChannel {
 
           return PrintResult.other;
       }
+    }
+  }
+
+  Future<bool> configurePrinter(TelpoPrinterConfiguration configuration) async {
+    try {
+      final isSuccess = await _platform.invokeMethod(
+        'configurePrinter',
+        {
+          "data": configuration.toJson(),
+        },
+      );
+
+      return isSuccess ?? false;
+    } catch (e) {
+      log('TELPO EXCEPTION: $e');
+
+      return false;
     }
   }
 }

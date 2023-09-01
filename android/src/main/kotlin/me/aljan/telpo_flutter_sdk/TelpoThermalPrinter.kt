@@ -171,25 +171,21 @@ class TelpoThermalPrinter(activity: TelpoFlutterSdkPlugin) {
         }
     }
 
-    private fun setMonoSpace() {
-        val path = "/Internal storage/roboto.ttf"
-        val intent = Intent("android.intent.action.set.printer.mode")
-        intent.putExtra("printer_monoFont_path", path) //monospace font
-        context.sendBroadcast(intent)
-    }
+//    private fun setMonoSpace() {
+//        val path = "/Internal storage/roboto.ttf"
+//        val intent = Intent("android.intent.action.set.printer.mode")
+//        intent.putExtra("printer_monoFont_path", path) //monospace font
+//        context.sendBroadcast(intent)
+//    }
 
     private inner class Print : Thread() {
         override fun run() {
             super.run()
             try {
-                setMonoSpace()
+//                setMonoSpace()
                 mUsbThermalPrinter?.reset()
                 mUsbThermalPrinter?.setMonoSpace(true);
                 mUsbThermalPrinter?.setGray(7);
-//                mUsbThermalPrinter?.setAlgin(UsbThermalPrinter.ALGIN_LEFT)
-//                mUsbThermalPrinter?.setTextSize(16)
-
-                //println("ERMEK printed 9")
 
                 for (data in printDataArray) {
                     val type = utils.getPrintType(data["type"].toString())
@@ -199,9 +195,6 @@ class TelpoThermalPrinter(activity: TelpoFlutterSdkPlugin) {
                             printText(data)
                         }
                         PrintType.EscPos -> {
-                            //println("ERMEK printed ESC POS")
-//                            mUsbThermalPrinter?.reset()
-//                            mUsbThermalPrinter?.setMonoSpace(true)
                             printEscPos(data)
                         }
                         PrintType.Byte -> {
